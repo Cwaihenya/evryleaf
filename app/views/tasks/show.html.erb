@@ -1,0 +1,15 @@
+
+<div class="row">
+    <div class="col-lg-8 mb-4">
+     <h1>Task Detail Screen </h1>
+      <p>Title: <%= @task.title %></p>
+      <p>Content: <%= @task.content %></p>
+      <p>Deadline: <%= @task.deadline %></p>
+      <p>Status: <%= @task.status %></p>
+      <p>Priority: <%= @task.priority %></p>
+
+      <br>
+      <%= link_to 'task list screen', tasks_path,class:"btn btn-primary", id:"sendMessageButton" %>
+    </div>
+  </div>
+<%= t('task.index') %>

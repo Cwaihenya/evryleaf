@@ -1,25 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Model name
+Name : Task
+Name : User
+Name : Labels
 
-Things you may want to cover:
+Tasks Tables
+t.string "title"
+t.string "content"
+t.string "status"
+t.string "priority"
+t.date "deadline"
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# evryleaf
+t.string :Name
+t.string :Email
+t.string :Password
+t.string :Password_confirmation
