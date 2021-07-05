@@ -12,7 +12,7 @@ RSpec.describe 'Task management function', type: :system do
           fill_in 'task_deadline', with: '1/3/2020'
 
         click_button "Create Task"
-        expect(page).to have_content 'Task was successfully created'
+        expect(page).to have_content 'title1'
       end
     end
   end
