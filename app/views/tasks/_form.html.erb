@@ -1,0 +1,47 @@
+<%= form_with(model: @tasks, local: true) do |f| %>
+  <% if @tasks.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @tasks.errors.count %>errors occurred.</h2>
+      <ul>
+
+      <% @tasks.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form">
+    <%= f.label :title %>
+    <%= f.text_field :title, class:'form-control' %>
+  </div>
+
+  <div class="form">
+    <%= f.label :content %>
+    <%= f.text_field :content,class:'form-control' %>
+  </div>
+
+  <div class="form">
+    <%= f.label :deadline,"Deadline" %>
+    <%= f.date_field :deadline,class:'form-control' %>
+  </div>
+
+  <div>
+    <%= f.label :status, "Status" %>
+    <%= f.select :status, ['Off','Pending','In motion'],{include_blank: 'Select Box'} %>
+  </div>
+
+  <div>
+    <%= f.label :priority, "Priority" %>
+    <%= f.select :priority, ['Low','Medium','High']%>
+  </div>
+
+
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to "Return to List of tasks screen", tasks_path %>
+<%= t('task.index') %>
