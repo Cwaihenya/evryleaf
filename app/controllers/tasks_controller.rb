@@ -1,12 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  def new
-      @tasks = Task.new
-    end
+  PER = 5
+
 
 def index
-  @tasks=Task.all
+@Tasks = Task.all.order("created_at DESC")
 end
+
+end
+def new
+    @tasks = Task.new
+  end
     def create
       @tasks = Task.new(task_params)
       if @tasks.save
@@ -48,5 +52,3 @@ end
  def set_task
    @task = Task.find(params[:id])
  end
-
-end
