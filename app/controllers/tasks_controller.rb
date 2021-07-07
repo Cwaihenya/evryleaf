@@ -6,23 +6,7 @@ PER = 5
     end
 
 def index
-  @tasks = Task.user_task_list(current_user.id)
-       if params[:sort_expired]
-        @tasks = @tasks.order('deadline DESC').page params[:page]
-    elsif params[:name].present?
-      if params[:status].present?
-       @tasks = @tasks.name_search(params[:name]).status_search(params[:status]).page params[:page]
-     else
-       @tasks = @tasks.name_search(params[:name]).page params[:page]
-     end
-   elsif params[:status].present?
-       @tasks = @tasks.status_search(params[:status]).page params[:page]
-   elsif params[:sort_priority]
-       @tasks = @tasks.priority_ordered.page params[:page]
-   else
-       @tasks = @tasks.order('created_at DESC').page params[:page]
-       @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(PER)
-     end
+   @tasks = Task.all.order(created_at: :desc)
 end
     def create
       @tasks = Task.new(task_params)
