@@ -9,6 +9,7 @@ priority: string |
 deadline: date |
 
   Users
+   ------------ |
 name: string |
 email: string |
 password: string |
