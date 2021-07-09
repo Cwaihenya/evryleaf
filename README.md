@@ -16,3 +16,10 @@ t.string :Name
 t.string :Email
 t.string :Password
 t.string :Password_confirmation
+
+heroku login $ heroku create
+
+Compile the app and push it on heroku
+rails assets:precompile RAILS_ENV=production $
+git add -A $ git commit -m "message"
+git push heroku step2:main
