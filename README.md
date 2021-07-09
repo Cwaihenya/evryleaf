@@ -1,25 +1,27 @@
 # README
 
-Model name
-Name : Task
-Name : User
-Name : Labels
+ Tasks
+ ------------ |
+title: string |
+content: string |
+status: string |
+priority: string |
+deadline: date |
 
-Tasks Tables
-t.string "title"
-t.string "content"
-t.string "status"
-t.string "priority"
-t.date "deadline"
+  Users
+name: string |
+email: string |
+password: string |
 
-t.string :Name
-t.string :Email
-t.string :Password
-t.string :Password_confirmation
 
-heroku login $ heroku create
+# Heroku
+***
+    heroku login
 
-Compile the app and push it on heroku
-rails assets:precompile RAILS_ENV=production $
-git add -A $ git commit -m "message"
-git push heroku step2:main
+    heroku create
+
+    rails assets:precompile RAILS_ENV=production
+
+    connect to github on Heroku dashboard(deploy tab)
+
+    select step2 branch to deploy
