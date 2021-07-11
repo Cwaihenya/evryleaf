@@ -26,3 +26,4 @@ password: string |
     connect to github on Heroku dashboard(deploy tab)
 
     select step2 branch to deploy
+
