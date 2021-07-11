@@ -1,8 +1,11 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-PER = 5
+
+
+
   def new
       @tasks = Task.new
+      #@tasks = Task.all.order(created_at: :desc)
     end
 
 def index
