@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 2021_07_05_033742) do
   create_table "tasks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title", null: false
-    t.string "content", null: false
-    t.string "status", null: false
-    t.string "priority", null: false
-    t.date "deadline", null: false
+    t.string "title"
+    t.string "content"
+    t.string "status"
+    t.string "priority"
+    t.date "deadline"
   end
 
   create_table "users", force: :cascade do |t|

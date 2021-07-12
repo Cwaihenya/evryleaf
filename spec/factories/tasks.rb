@@ -4,7 +4,7 @@ FactoryBot.define do
         content {'content1'}
         deadline { '1/1/2020' }
         status { 'pending' }
-        priority { 2 }
+        priority { 'Low' }
 
 
     end
@@ -14,6 +14,6 @@ FactoryBot.define do
       content {'content2'}
         deadline { '1/3/2020' }
         status { 'done' }
-        priority { '1' }
+        priority { 'High' }
     end
   end
