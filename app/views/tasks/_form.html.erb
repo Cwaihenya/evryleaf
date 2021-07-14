@@ -4,7 +4,7 @@
       <h2><%= @tasks.errors.count %>errors occurred.</h2>
       <ul>
 
-      <% @task.errors.full_messages.each do |msg| %>
+      <% @tasks.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -12,7 +12,7 @@
   <% end %>
 
 
-  <div class="form">
+  <div  class="form">
     <%= f.label :title %>
     <%= f.text_field :title, class:'form-control' %>
   </div>
@@ -22,19 +22,22 @@
     <%= f.text_field :content,class:'form-control' %>
   </div>
 
-  <div class="form">
+  <div class=form">
+
     <%= f.label :deadline,"Deadline" %>
     <%= f.date_field :deadline,class:'form-control' %>
-  </div>
+    </div>
 
-  <div>
+
+  <div class="form">
+
     <%= f.label :status, "Status" %>
-    <%= f.select :status, ['Off','Pending','In motion'],{include_blank: 'Select Box'} %>
+    <%= f.select :status, ['Not started','In progress','Completed'],{include_blank: 'Select Box'} %>
   </div>
 
-  <div>
+  <div class="form">
     <%= f.label :priority, "Priority" %>
-    <%= f.select :priority, ['Low','Medium','High']%>
+  <%= f.select(:priority, options_for_select([['Low','low'],['Medium','medium'],['High','high']])) %>
   </div>
 
 

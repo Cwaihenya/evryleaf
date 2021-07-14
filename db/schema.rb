@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_033742) do
     t.string "title"
     t.string "content"
     t.string "status"
-    t.string "priority"
+    t.integer "priority"
     t.date "deadline"
   end
 

@@ -1,10 +1,10 @@
 FactoryBot.define do
-  factory :first_task do
+  factory :task do
         title { 'task1'}
         content {'content1'}
         deadline { '1/1/2020' }
-        status { 'pending' }
-        priority { 'Low' }
+        status { 'Not started' }
+        priority { 'low' }
 
 
     end
@@ -13,7 +13,7 @@ FactoryBot.define do
       title { 'task2'}
       content {'content2'}
         deadline { '1/3/2020' }
-        status { 'done' }
-        priority { 'High' }
+        status { 'Completed' }
+        priority { 'high' }
     end
   end
