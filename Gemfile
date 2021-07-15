@@ -34,6 +34,8 @@ gem 'ransack'
 #gem 'carrier'
 gem 'jquery-rails'
 gem 'bootstrap'
+gem 'faker'
+
 
 
 # Use Redis adapter to run Action Cable in production
