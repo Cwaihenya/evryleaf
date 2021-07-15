@@ -29,8 +29,11 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bcrypt'
 gem 'kaminari'
+gem 'ransack'
 #gem 'nokogiri'
 #gem 'carrier'
+gem 'jquery-rails'
+gem 'bootstrap'
 
 
 # Use Redis adapter to run Action Cable in production
