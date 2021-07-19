@@ -3,8 +3,8 @@
 <h1>Tasks</h1>
 <nav class="navbar navbar-light bg-grey">
 <%= form_with url: tasks_path, method: :get, html: {class: "form-inline"} , local: true do |form| %>
-  <%= form.label :task_name, "Task name:" %>
-  <%= form.text_field :task_name, placeholder: "Search...", class: "form-control mr-sm-2" %>
+  <%= form.label :title, "Task Title:" %>
+  <%= form.text_field :title, placeholder: "Search...", class: "form-control mr-sm-2" %>
   <%= form.label :status, "Status:" %>
   <%= form.select :status, options_for_select([[''],['Not started'], ['In progress'], ['Completed']]), class: "form-control mr-sm-2"%>
   <%= form.submit value: "search", class: "btn btn-outline-success my-2 my-sm-0", type: "submit" %>
@@ -14,8 +14,8 @@
 <table class="table table-hover">
       <thead>
         <tr>
-      <th >Task name</th>
-      <th>Task detail</th>
+      <th >Title</th>
+      <th>Content</th>
       <th class="text-info">Deadline</th>
       <th>Status</th>
       <th class="text-info">Priority</th>
@@ -23,18 +23,12 @@
     </tr>
       </thead>
 
-
-
-
-
   <p>
     <button type="button" class="btn btn-info" id="sort_deadline"><%= link_to "Sort by end deadline", tasks_path(sort_expired: "true") %></button>
     <button type="button" class="btn btn-info" id="sort_priority"><%= link_to "Sort by priority", tasks_path(sort_priority: "true") %></button>
   </p>
   <tbody>
     <% @tasks.each do |task| %>
-
-
       <tr>
         <td ><%= task.title %></td>
         <td ><%= task.content %></td>
