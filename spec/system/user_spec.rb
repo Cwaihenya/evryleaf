@@ -25,10 +25,10 @@ RSpec.describe 'User management function', type: :system do
       admin_user = FactoryBot.create(:admin_user)
     end
     context 'When user tries login' do
-      it 'Login is a success' do
+      it 'Login is successful' do
           visit new_session_path
-          fill_in 'user[email]', with: @user.email
-          fill_in 'user[password]', with: @user.password
+          fill_in 'session[email]', with: @user.email
+          fill_in 'session[password]', with: @user.password
         click_button "Log in"
         visit user_path (@user.id)
         expect(page).to have_content 'New task'
@@ -83,8 +83,8 @@ RSpec.describe 'User management function', type: :system do
     context 'When general user tries to access admin screen' do
       it 'Admin screen is not displayed' do
         visit new_session_path
-        fill_in 'user[email]', with: @user.email
-        fill_in 'user[password]', with: @user.password
+        fill_in 'session[email]', with: @user.email
+        fill_in 'session[password]', with: @user.password
         click_button "Log in"
         visit admin_users_path
         expect(page).to have_content 'Tasks'
@@ -101,7 +101,7 @@ RSpec.describe 'User management function', type: :system do
         fill_in 'user[email]', with: 'sample1@example.com'
         fill_in 'user[password]', with: '00000000'
         fill_in 'user[password_confirmation]', with: '00000000'
-        click_button "Create my account"
+        click_button "Register"
         expect(page).to have_content 'Set admin'
       end
     end
