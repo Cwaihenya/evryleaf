@@ -15,7 +15,7 @@ RSpec.describe 'User management function', type: :system do
     context 'When the user tries to jump to the task list screen without logging' do
       it 'Transition to the login screen' do
         visit tasks_path
-        expect(page).to have_content 'Log In'
+        expect(page).to have_content 'Log in'
       end
     end
   end
@@ -27,9 +27,9 @@ RSpec.describe 'User management function', type: :system do
     context 'When user tries login' do
       it 'Login is a success' do
           visit new_session_path
-          fill_in 'email', with: @user.email
-          fill_in 'password', with: @user.password
-        click_button "Login"
+          fill_in 'user[email]', with: @user.email
+          fill_in 'user[password]', with: @user.password
+        click_button "Log in"
         visit user_path (@user.id)
         expect(page).to have_content 'New task'
       end
@@ -39,7 +39,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: @user.email
         fill_in 'session[password]', with: @user.password
-        click_button "Login"
+        click_button "Log in"
         visit user_path (@user.id)
         expect(page).to have_content 'Welcome to your page sample'
       end
@@ -49,7 +49,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
         fill_in 'session[password]', with: '00000000'
-        click_button "Login"
+        click_button "Log in"
         visit user_path (@user.id)
         expect(page).to have_content 'Tasks'
       end
@@ -59,9 +59,9 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
         fill_in 'session[password]', with: '00000000'
-        click_button "Login"
-        click_link "Logout"
-        expect(page).to have_content 'Sign up'
+        click_button "Log in"
+        click_link "Log Out"
+        expect(page).to have_content 'Sign Up'
       end
     end
   end
@@ -75,7 +75,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
          fill_in 'session[password]', with: '00000000'
-        click_button "Login"
+        click_button "Log in"
         visit admin_users_path
         expect(page).to have_content 'Users List'
       end
@@ -83,9 +83,9 @@ RSpec.describe 'User management function', type: :system do
     context 'When general user tries to access admin screen' do
       it 'Admin screen is not displayed' do
         visit new_session_path
-        fill_in 'email', with: @user.email
-        fill_in 'password', with: @user.password
-        click_button "Login"
+        fill_in 'user[email]', with: @user.email
+        fill_in 'user[password]', with: @user.password
+        click_button "Log in"
         visit admin_users_path
         expect(page).to have_content 'Tasks'
       end
@@ -95,7 +95,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
          fill_in 'session[password]', with: '00000000'
-        click_button "Login"
+        click_button "Log in"
         visit new_admin_user_path
         fill_in 'user[name]', with: 'sample'
         fill_in 'user[email]', with: 'sample1@example.com'
@@ -110,7 +110,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
          fill_in 'session[password]', with: '00000000'
-        click_button "Login"
+        click_button "Log in"
         visit admin_user_path (@user.id)
         expect(page).to have_content 'Tasks of '+@user.name
       end
@@ -120,7 +120,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
          fill_in 'session[password]', with: '00000000'
-        click_button "Login"
+        click_button "Log in"
         visit edit_admin_user_path(@user.id)
         expect(page).to have_content 'Edit the user'
       end
@@ -130,7 +130,7 @@ RSpec.describe 'User management function', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin2@example.com'
         fill_in 'session[password]', with: '00000000'
-        click_button "Login"
+        click_button "Log in"
         visit admin_users_path
         click_on "delete#{@user.id}"
         expect(page).to_not have_content @user.id

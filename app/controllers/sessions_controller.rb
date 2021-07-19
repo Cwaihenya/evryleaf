@@ -6,20 +6,30 @@ class SessionsController < ApplicationController
       redirect_to tasks_path
   end
   def create
-  @user = User.find_by(email: params[:session][:email].downcase)
-  if @user && @user.authenticate(params[:session][:password])
-    session[:user_id] = @user.id
-    if current_user.admin?
-           redirect_to admin_users_path
-        else
-        redirect_to user_path(user.id)
-        end
-  else
-    flash.now[:danger] = 'Login failed'
-    render :new
-  end
+  user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
+      redirect_to user_path(user.id)
+    else
+      flash.now[:danger] = 'Login failed'
+      render :new
+    end
   end
 end
+  #def create
+#  @user = User.find_by(email: params[:session][:email].downcase)
+#  if @user && @user.authenticate(params[:session][:password])
+  #  session[:user_id] = @user.id
+    #if current_user.admin?
+           #redirect_to admin_users_path
+        #else
+      #  redirect_to user_path(user.id)
+      ##else
+  #  flash.now[:danger] = 'Login failed'
+  #  render :new
+  #end
+#  end
+#end
   def destroy
      session.delete(:user_id)
      flash[:notice] = 'Logged out'

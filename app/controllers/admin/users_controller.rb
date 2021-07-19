@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   skip_before_action :login_required, only: [:edit, :update, :destroy, :show]
-	before_action :is_admin
+	before_action :admin
 	before_action :set_user, only: [:edit, :update, :destroy, :show]
 
 	def index
@@ -64,7 +64,7 @@ class Admin::UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def is_admin
+	def admin
 		if current_user.admin == false || current_user.admin.blank?
 			redirect_to tasks_path, notice:"Only administrators can access this page!!"
 		end

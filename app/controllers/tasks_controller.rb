@@ -7,23 +7,7 @@ PER = 5
       @tasks = Task.new
       #@tasks = Task.all.order(created_at: :desc)
     end
-    def create
-      @task = Task.new(task_params)
-     @task.user_id = current_user.id
-    if params[:back]
-    render :new
-    else
-    if @task.save
-    redirect_to tasks_path, notice: "The task was successfully created"
-     else
-        render :new
-     end
-    end
-    end
-  end
-
     def index
-
       @tasks = Task.user_task_list(current_user.id)
           if params[:sort_expired]
            @tasks = Task.all.order('deadline DESC').page params[:page]
@@ -40,26 +24,24 @@ PER = 5
       else
           @tasks = Task.all.order('created_at DESC').page params[:page]
           @tasks = @tasks.order(created_at: :desc).page(params[:page]).per(PER)
-        end
       end
-
+    end
     def create
       @task = Task.new(task_params)
      @task.user_id = current_user.id
-   if params[:back]
- render :new
- else
-   if @task.save
-   redirect_to tasks_path, notice: "The task was successfully created"
+    if params[:back]
+    render :new
+    else
+    if @task.save
+    redirect_to tasks_path, notice: "The task was successfully created"
      else
         render :new
      end
     end
-  end
+    end
     def show
    @tasks = Task.find(params[:id])
   end
-
   def edit
      @tasks = Task.find(params[:id])
   end
@@ -73,18 +55,16 @@ PER = 5
       render 'edit'
     end
   end
+end
   def destroy
    @task.destroy
    redirect_to tasks_path
    flash[:success] = "You have deleted the task!"
  end
-end
  private
-
   def task_params
    params.require(:task).permit(:title,:content,:deadline,:status,:priority)
  end
-
  def set_task
    @task = current_user.tasks.find(params[:id])
  end
@@ -93,6 +73,6 @@ end
 if current_user.id !=@task.user_id
 flash[:notice] = "No permission"
 redirect_to_task_path
-
+end
 end
 end
