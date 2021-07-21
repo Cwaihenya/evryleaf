@@ -14,4 +14,4 @@
                password: password,
                )
 end
- User.create(name: "Admin", email: "admin@admin.com", password: "myadmin", admin:true)
+ User.create(name: "Admin", email: "myadmin@admin.com", password: "myadmin", admin:true)

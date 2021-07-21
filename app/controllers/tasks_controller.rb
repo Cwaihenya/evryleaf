@@ -11,7 +11,7 @@ PER = 5
       @tasks = Task.user_task_list(current_user.id)
           if params[:sort_expired]
            @tasks = Task.all.order('deadline DESC').page params[:page]
-       elsif params[:task_name].present?
+       elsif params[:title].present?
          if params[:status].present?
           @tasks = Task.all.title_search(params[:task_name]).status_search(params[:status]).page params[:page]
         else
