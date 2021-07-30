@@ -14,6 +14,8 @@ PER = 5
        elsif params[:title].present?
          if params[:status].present?
           @tasks = Task.all.title_search(params[:task_name]).status_search(params[:status]).page params[:page]
+        elsif params[:label_id].present?
+                @tasks = @tasks.label_search(params[:label_id]).page params[:page]
         else
           @tasks = Task.all.title_search(params[:task_name]).page params[:page]
         end
@@ -63,7 +65,7 @@ end
  end
  private
   def task_params
-   params.require(:task).permit(:title,:content,:deadline,:status,:priority)
+   params.require(:task).permit(:title,:content,:deadline,:status,:priority, label_ids: [])
  end
  def set_task
    @task = current_user.tasks.find(params[:id])
