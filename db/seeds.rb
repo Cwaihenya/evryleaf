@@ -14,7 +14,7 @@
                password: password,
                )
 end
- User.create(name: "Admin", email: "theadmin@admin.com", password: "myadmin", admin:true)
+ User.create(name: "Admin", email: "anadmin@admin.com", password: "myadmin", admin:true)
  10.times do |index|
 		Task.create!(
 			    task_name: Faker::Lorem.words,
