@@ -1,47 +1,58 @@
 require 'rails_helper'
-RSpec.describe 'Label management function', type: :system do
+RSpec.describe 'Label function', type: :system do
+  before do
+    FactoryBot.create(:user, name: 'cynthia',
+                             email: 'cynthia@gmail.com',
+                             password: 'password',
+                             password_confirmation: 'password')
+    visit new_session_path
+    fill_in 'Email', with: 'cynthia@gmail.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Log in'
+    @user = User.first
+    FactoryBot.create(:label, name: "Work", user_id: @user.id)
+    FactoryBot.create(:label, name: "School", user_id: @user.id)
+    FactoryBot.create(:label, name: "Social", user_id: @user.id)
+  end
   describe 'New creation function' do
-    before do
-      @user = FactoryBot.create(:user)
-      @label = FactoryBot.create(:label)
-      @label2 = FactoryBot.create(:label2)
+    context 'When creating a new label' do
+      it 'Should display created Label' do
+        visit new_label_path
+        fill_in 'Name', with: 'Work1'
+        click_button 'Create Label'
+        expect(page).to have_content 'successfully created.'
+      end
     end
-    context 'When creating a new task' do
-      it 'Multiple labels can be registered with it' do
-        visit new_session_path
-        fill_in 'user_email', with: @user.email
-        fill_in 'user_password', with: @user.password
-        click_button "Login"
-        task = FactoryBot.create(:task, task_title: 'task_name1', priority: "high", user_id: @user.id)
-        labellin1 = FactoryBot.create(:labelling, label_id: @label.id , task_id: task.id)
-        labellin2 = FactoryBot.create(:labelling, label_id: @label2.id , task_id: task.id)
+  end
+  describe 'Adding multiple labels to tasks function' do
+    context 'When you add labels to task' do
+      it 'The creates task with label' do
+        Label.create(name: 'Work2')
+        Label.create(name: 'Social1')
+        visit new_task_path
+        fill_in 'Title', with: 'Task1'
+        fill_in 'Content', with: 'details'
+        fill_in 'Deadline', with: '002021-09-24'
+        select 'Complete'
+        select 'High'
+        select 'Work'
+        select 'Social'
+        click_button 'Create Task'
+        expect(page).to have_content 'The task was successfully created'
+      end
+    end
+  end
+  describe 'Search function' do
+    context 'When you search by label' do
+      it "Filter by tasks that include label selected" do
+        label = Label.create(name: 'Work3')
+        task = Task.create(title: "title1", content: "content1", deadline: "2021/09/24", status:"Complete", priority: "low", user_id: @user.id)
+        labelling = Labelling.create(label_id: label.id)
         visit tasks_path
-        expect(page).to have_content 'task_name1'
-      end
-    end
-    context 'When going on the task details screen' do
-      it 'Output the list of labels associated with the task' do
-        visit new_session_path
-        fill_in 'user_email', with: @user.email
-        fill_in 'user_password', with: @user.password
-        click_button "Login"
-        task = FactoryBot.create(:task, task_title: 'task_name1', priority: "high", user_id: @user.id)
-        labellin1 = FactoryBot.create(:labelling, label_id: @label.id , task_id: task.id)
-        labellin2 = FactoryBot.create(:labelling, label_id: @label2.id , task_id: task.id)
-        visit task_path(task.id)
-        expect(page).to have_content 'Label 1'
-        expect(page).to have_content 'Label 2'
-      end
-    end
-    context 'When you search for label' do
-      it "Tasks contain the labels are narrowed down" do
-        visit new_session_path
-        fill_in 'user_email', with: @user.email
-        fill_in 'user_password', with: @user.password
-        click_button "Login"
-        search_label = "Label 1"
-        visit tasks_path(label_id: @label.id)
-        expect(page).to have_content search_label
+        select 'Work'
+        click_on 'search'
+        expect(page).to have_content 'Work'
+        assert Task.ransack(title:[:q])
       end
     end
   end

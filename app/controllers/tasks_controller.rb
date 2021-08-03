@@ -13,14 +13,14 @@ PER = 5
            @tasks = Task.all.order('deadline DESC').page params[:page]
        elsif params[:title].present?
          if params[:status].present?
-          @tasks = Task.all.title_search(params[:task_name]).status_search(params[:status]).page params[:page]
-        elsif params[:label_id].present?
-                @tasks = @tasks.label_search(params[:label_id]).page params[:page]
+          @tasks = Task.all.title_search(params[:title]).status_search(params[:status]).page params[:page]
         else
-          @tasks = Task.all.title_search(params[:task_name]).page params[:page]
+          @tasks = Task.all.title_search(params[:title]).page params[:page]
         end
       elsif params[:status].present?
           @tasks = Task.all.status_search(params[:status]).page params[:page]
+      elsif params[:label_id].present?
+        @tasks = @tasks.label_search(params[:label_id]).page params[:page]
       elsif params[:sort_priority]
           @tasks = Task.all.order('priority DESC').page params[:page]
       else
@@ -48,16 +48,16 @@ PER = 5
      @tasks = Task.find(params[:id])
   end
   def update
-     respond_to do |format|
-    @tasks = Task.find(params[:id])
-    if @tasks.update(task_params)
-      redirect_to tasks_path
-       flash[:success] = "You have edited this task！"
-    else
-      render 'edit'
+    respond_to do |format|
+      if @task.update(task_params)
+        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
-end
   def destroy
    @task.destroy
    redirect_to tasks_path
