@@ -61,9 +61,9 @@ RSpec.describe 'Task management function', type: :system do
    end
     context 'Title performing fuzzy search of title and status search' do
       it "Narrow down tasks that include search keywords in the task name and exactly match the status" do
-        search_name = "task_name2"
+        search_title = "task_name2"
         search_status = "Not started"
-          visit tasks_path(task_name: search_name, status: search_status)
+          visit tasks_path(task_name: search_title, status: search_status)
           expect(page).to have_content 'task'
           expect(page).to have_content 'Not started'
       end
