@@ -8,8 +8,19 @@
       <p>Status: <%= @task.status %></p>
       <p>Priority: <%= @task.priority %></p>
 
+
+      <p>
+        <strong>label name:</strong>
+          <% @task.labels.each do |label| %>
+            <%= label.name %><br>
+          <% end %>
+      </p>
+
+      <h3>List of labels associated with the tasks</h3>
+      <% @task.labels.pluck(:name).each do |task_label| %>
+        <p><%= task_label %></p>
+      <% end %>
       <br>
       <%= link_to 'task list screen', tasks_path,class:"btn btn-primary", id:"sendMessageButton" %>
     </div>
   </div>
-<%= t('task.index') %>

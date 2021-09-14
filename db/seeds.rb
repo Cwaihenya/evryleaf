@@ -14,4 +14,22 @@
                password: password,
                )
 end
- User.create(name: "Admin", email: "myadmin@admin.com", password: "myadmin", admin:true)
+ User.create(name: "Admin", email: "anadmin8@admin.com", password: "myadmin", admin:true)
+ 10.times do |index|
+		Task.create!(
+			    title: Faker::Lorem.words,
+			    content: Faker::Lorem.sentence,
+			    status: ["Completed","In progress","Not started"].sample,
+			    deadline: '2020-11-06',
+			    priority: ["high", "medium","low"].sample,
+			    user_id: User.all.pluck(:id).sample,
+			)
+end
+10.times do |id|
+	Label.create!(
+		      name: Faker::Verb.past_participle,
+		   )
+end
+10.times do |n|
+		Labelling.create!(label_id: rand(1..3), task_id: 1)
+end

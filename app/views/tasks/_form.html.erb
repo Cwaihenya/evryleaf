@@ -1,47 +1,38 @@
 <%= form_with(model: @tasks, local: true) do |f| %>
   <% if @tasks.errors.any? %>
     <div id="error_explanation">
-      <h2><%= @tasks.errors.count %>errors occurred.</h2>
+      <h2><%= @tasks.errors.count %> errors occurred.</h2>
       <ul>
-
       <% @tasks.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-
   <div  class="form">
     <%= f.label :title %>
     <%= f.text_field :title, class:'form-control' %>
   </div>
-
   <div class="form">
     <%= f.label :content %>
     <%= f.text_field :content,class:'form-control' %>
   </div>
-
-  <div class=form">
-
+  <div class="form">
     <%= f.label :deadline,"Deadline" %>
     <%= f.date_field :deadline,class:'form-control' %>
     </div>
-
-
   <div class="form">
-
     <%= f.label :status, "Status" %>
     <%= f.select :status, ['Not started','In progress','Completed'],{include_blank: 'Select Box'} %>
   </div>
-
   <div class="form">
     <%= f.label :priority, "Priority" %>
   <%= f.select(:priority, options_for_select([['Low','low'],['Medium','medium'],['High','high']])) %>
   </div>
-
-
-
+  <div class="field">
+    <%= f.label :label %>
+    <%= f.collection_select(:label_ids, Label.all, :id, :name, {prompt: "Select Labels"}, {multiple: true, class: "custom-select"} ) %>
+  </div>
   <div>
     <%= f.submit %>
   </div>

@@ -35,7 +35,7 @@ gem 'jquery-rails'
 gem 'bootstrap'
 gem 'faker'
 
-
+gem 'nokogiri', '~> 1.11'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
